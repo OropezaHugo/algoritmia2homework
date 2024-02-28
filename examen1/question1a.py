@@ -1,12 +1,13 @@
-def function(n, my_dp):
-    if n < len(my_dp):
-        return my_dp[n], my_dp
+private static int function(int n, int [] dp) {
+    if (n == 0 ) {
+      return 0;
+    }
 
-    else:
-        i = len(my_dp)
-        while i <= n:
-            fibo_c = my_dp[-1] + my_dp[-2]
-            my_dp.append(fibo_c)
-            i += 1
-        return my_dp[-1]
+    if (n == 1 || n == 2) {
+      return 1;
+    }
 
+    dp[n] = function(n - 1, dp) + function(n - 2, dp);
+
+    return dp[n];
+  }
