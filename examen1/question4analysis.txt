@@ -1,0 +1,14 @@
+a)
+
+the problem here looks to be the minimum amount of gifts we have to
+move to organize them from the less valued to the best valued(1,2,....10)
+
+b)
+the subproblem is to know if the gift is on its place of the sequence:
+where
+a = gifts[i]
+b = gifts[i + 1]
+F(a,b) = b > a ? 1 + F(i + 1, i + 2) : F(i + 1, i + 2)
+
+c)
+the overlap occurs when we are asking every time we move through the list

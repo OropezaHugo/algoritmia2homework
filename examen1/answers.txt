@@ -1,0 +1,12 @@
+Q1_b:
+we need a base case because of the fibonacci logic of sequence,
+and we also need a case where the requested number is already in my_dp
+
+Q2:
+not necessarily because what makes a DP algorithm DP is the ability to memorization of previous solutions,
+not the fact of just combin sub_problems solutions
+
+Q3:
+yes, we do, as we can see in insertion pattern we request the
+previous second word edit distance value ("E(i, j-1)")
+
