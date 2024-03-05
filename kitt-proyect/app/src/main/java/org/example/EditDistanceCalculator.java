@@ -29,4 +29,13 @@ public class EditDistanceCalculator {
                     lengthStr2 - 1) // Replace
     );
   }
+
+  static double getWordsSimilarityPercentage(String word1, String word2) {
+    word1 = word1.toLowerCase();
+    word2 = word2.toLowerCase();
+    int minSimilarity = Math.max(word1.length(), word2.length());
+    int differences = EditDistanceCalculator.editDist(word1, word2, word1.length(), word2.length());
+    return 100 - ((double) differences / minSimilarity) * 100;
+
+  }
 }

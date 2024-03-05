@@ -5,10 +5,17 @@ import java.util.Arrays;
 
 public class SimilarityCalculator {
   private final ArrayList<String> misspelledWords;
+  private final ArrayList<String> sentensesText1;
+  private final ArrayList<String> sentensesText2;
   private final ArrayList<String> wordsText1;
   private final ArrayList<String> wordsText2;
   private double textSimilarity;
   public SimilarityCalculator(String text1, String text2) {
+
+    this.sentensesText1 = new ArrayList<>(Arrays.asList(text1.split("\\.")));
+    this.sentensesText2 = new ArrayList<>(Arrays.asList(text2.split("\\.")));
+    this.sentensesText1.remove(this.sentensesText1.size() - 1);
+    this.sentensesText2.remove(this.sentensesText2.size() - 1);
     this.wordsText1 = new ArrayList<>(Arrays.asList(text1.replaceAll("\\.", "").split(" ")));
     this.wordsText2 = new ArrayList<>(Arrays.asList(text2.replaceAll("\\.", "").split(" ")));
     this.misspelledWords = new ArrayList<>();
@@ -17,42 +24,41 @@ public class SimilarityCalculator {
   }
 
   private void calculateTextsSimilarity() {
-    double similarityoftexts = 0.0;
-    String mostSimilarWord = "";
-    double similarityOfWords = 0.0;
-    for (String word1: wordsText1) {
-      mostSimilarWord = mostSimilarWord(word1, wordsText2);
-      similarityOfWords = getWordsSimilarityPercentage(word1, mostSimilarWord);
-      if (similarityOfWords > 55.0 && similarityOfWords < 100.0) {
-        misspelledWords.add(word1);
-        misspelledWords.add(mostSimilarWord);
-        wordsText2.remove(mostSimilarWord);
-        similarityoftexts += 1.0;
-      }
-      if (similarityOfWords == 100.0) {
-        wordsText2.remove(mostSimilarWord);
-        similarityoftexts += 1.0;
+    double similarityoftexts;
+    ArrayList<String> lcsequence = new ArrayList<>();
+    ArrayList<String> sentenseAsList;
+    ArrayList<String> sentense2AsList;
+    for (String sentense: sentensesText1) {
+      for (String sentense2: sentensesText2) {
+        sentenseAsList = new ArrayList<>(Arrays.asList(sentense.split(" ")));
+        sentense2AsList = new ArrayList<>(Arrays.asList(sentense2.split(" ")));
+        ArrayList<String>[][] myArraylist= new ArrayList[sentenseAsList.size() + 1][sentense2AsList.size() + 1];
+        ArrayList<String> sequence =  LongestCommonSequence.longestCommonSequence(sentenseAsList, sentense2AsList, sentenseAsList.size(), sentense2AsList.size(), myArraylist);
+        if (sequence.size() > lcsequence.size()) {
+          lcsequence = sequence;
+        }
       }
     }
+    for (String word: lcsequence) {
+      double similarity = EditDistanceCalculator.getWordsSimilarityPercentage(mostSimilarWord(word, wordsText2), word);
+      if (similarity > 55.0 && similarity < 100.0) {
+        misspelledWords.add(word);
+        misspelledWords.add(mostSimilarWord(word, wordsText2));
+      }
+    }
+    similarityoftexts = lcsequence.size();
     textSimilarity = (similarityoftexts / wordsText1.size()) * 100;
   }
 
 
-  private double getWordsSimilarityPercentage(String word1, String word2) {
-    word1 = word1.toLowerCase();
-    word2 = word2.toLowerCase();
-    int minSimilarity = Math.max(word1.length(), word2.length());
-    int differences = EditDistanceCalculator.editDist(word1, word2, word1.length(), word2.length());
-    return 100 - ((double) differences / minSimilarity) * 100;
 
-  }
 
   private String mostSimilarWord(String word1, ArrayList<String> wordlist) {
     double similarity = 0;
     String mosSimilarWord = "";
     for (String wordToCompare: wordlist) {
-      if (getWordsSimilarityPercentage(word1, wordToCompare) > similarity) {
-        similarity = getWordsSimilarityPercentage(word1, wordToCompare);
+      if (EditDistanceCalculator.getWordsSimilarityPercentage(word1, wordToCompare) > similarity) {
+        similarity = EditDistanceCalculator.getWordsSimilarityPercentage(word1, wordToCompare);
         mosSimilarWord = wordToCompare;
       }
     }
@@ -73,5 +79,13 @@ public class SimilarityCalculator {
   public String getTextSimilarity() {
 
     return String.valueOf(textSimilarity).substring(0,Math.min(String.valueOf(textSimilarity).length(), 5)) + "%";
+  }
+
+  public ArrayList<String> getSentensesText1() {
+    return sentensesText1;
+  }
+
+  public ArrayList<String> getSentensesText2() {
+    return sentensesText2;
   }
 }
