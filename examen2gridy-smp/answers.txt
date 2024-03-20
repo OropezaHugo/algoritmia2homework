@@ -1,0 +1,34 @@
+Q1:
+we need to proof that the algorithm is greedy formally because
+we have to proof every greedy choice and how it turns out to resolve the problem
+
+Q2:
+the Rabin karp algorithm's complexity can be worse or the same
+as the naive algorithm when we have multiple windows with the
+same hashcode as the pattern but different content
+
+
+Q3:
+the highest value we can get in the prefix function is the pattern's length
+because this is the highest number of chars that must match to find the pattern
+
+Q4:
+a) my greedy choice is:
+gh = [1..J]
+sv = [1..J] where any element is 1 initially
+gh[J] < gh[J + 1] -> sv[J] = 1 + sv[J + 1]
+gh[J] < gh[J - 1] -> sv[J] = 1 + sv[J - 1]
+
+b) optimal substructure
+GC1 = gh[J] < gh[J + 1] -> sv[J] = 1 + sv[J + 1]
+GC2 = gh[J] < gh[J - 1] -> sv[J] = 1 + sv[J - 1]
+TS = Total Solution
+LS = Local Solution
+
+TS = sum (LS(1) -> LS(J))
+(TS = sumatoria de (LS de 1 a J))
+
+d) time complexity:
+O((n - 1)^2) where n = guests quantity
+then: O(m^2)
+
