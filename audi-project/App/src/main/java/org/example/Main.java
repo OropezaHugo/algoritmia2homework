@@ -9,7 +9,8 @@ public class Main {
     String entry = scanner.nextLine();
     int numberX = Integer.parseInt(entry.substring(4));
     //GraphOperations graphOperations = new GraphOperations(Reader.readFileToString("App/src/main/resources/eg1file.txt"), numberX);
-    GraphOperations graphOperations = new GraphOperations(Reader.readFileToString("App/src/main/resources/eg2file.txt"), numberX);
+    //GraphOperations graphOperations = new GraphOperations(Reader.readFileToString("App/src/main/resources/eg2file.txt"), numberX);
+    GraphOperations graphOperations = new GraphOperations(Reader.readFileToString("App/src/main/resources/eg3file.txt"), numberX);
     System.out.println(graphOperations.getMSTPrimResponse());
 
     String entry2 = scanner.nextLine();

@@ -120,6 +120,9 @@ public class GraphOperations {
     ArrayList<ArrayList<RelationEdge>> groups = MaximumSpanningTree();
     HashSet<String> KCaseNodes = new HashSet<>();
     ArrayList<RelationEdge> MSTEdges = getMSTPrim();
+    if (getNodes(MSTEdges).size() < this.groupQuantity) {
+      return "It is not possible";
+    }
     StringBuilder result = new StringBuilder();
     for (ArrayList<RelationEdge> group : groups) {
       HashSet<String> groupNodes = new HashSet<>();
