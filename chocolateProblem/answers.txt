@@ -1,0 +1,9 @@
+I applied a DP solution, so:
+i) I analyzed the problem that a sub-problem
+is that if we can add a new chocolate peace size which is different
+of the added ones, until it stops to be possible we can take as many
+peaces as pieces added we have.
+ii) The overlaps occur when we can not add a peace unless it is not on the
+already taken peaces list
+iv) the implementation is O(n) because the only iteration depends on the
+chocolate length
