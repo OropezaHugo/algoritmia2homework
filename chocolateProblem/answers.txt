@@ -7,3 +7,6 @@ ii) The overlaps occur when we can not add a peace unless it is not on the
 already taken peaces list
 iv) the implementation is O(n) because the only iteration depends on the
 chocolate length
+
+And finally I don't think that there is a way to use Greedy to solve the problem
+because there is not a useful greedy choice to make
