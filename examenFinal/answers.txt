@@ -1,0 +1,32 @@
+q1)
+if the problem has subproblem we can use 3 algorithms:
+Greedy
+Dynamic Programming
+"Divide y vencerás"
+
+q2)
+T = xyzasxyzxmb
+P = xyzxm
+Alphabet = [x,y,z,m]
+states Set = [0,1,2,3,4]
+accepting state = 4
+
+q3)
+T = xyzasxyzxmb
+P = xyzxm
+Transition Function for(&(2,x)[2]) = 1
+
+q4)
+a)
+    1)
+        i)the problem require to choose the best meal collection to win the competition,
+        for that, the subproblem is the choice between 1 or other meal(
+        for M5 = max (Mj + 1, Mi)
+        )
+        ii) the overlap occurs on every choice where we are already take any meal
+    2)
+        i) the greedy choice is to choose the meal that less time spent to eat until the time limit exceeds
+        ii)optimal substructure: TotalSolution[meals_spent_time_list], rest_time = 1 + TotalSolution[meals_spent_time_list - less_time_spent_meal], rest_time - less_time_spent_meal's_time
+        where:
+        TotalSolution[G], t =  less_time_spent_meal > t ? 0 : 1
+d) time complexity = O(n) because of recursion over the meal's list
